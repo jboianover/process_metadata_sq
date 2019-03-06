@@ -10,14 +10,14 @@ from bin.functions import groupby_clause, where_clause, select_clause, from_clau
 #       '-o', 'process.sql',
 #      ]
 
-#process_name, chdir, file_name, output_file = parse_arguments(arg)
+#process_name, chdir, file_name, output_file = parse_arguments(arg) BORRAR
 
 process_name, chdir, file_name, output_file = parse_arguments(sys.argv[1:])
 
 #process_name = 'tc_titulares'
-#chdir = 'C:\\Users\\Jonathan Boianover\\Desktop\\'
-#file_name = 'process_metadata_reglas.xls'
-#output_file = 'groupby_output.txt'
+#chdir = "C:\\Users\\Jonathan Boianover\\Desktop\\BIG DATA - TEAM\\GALICIA\\GALICIA - Incentivos - FASE II\\"
+#file_name = 'process_metadata_reglas.xlsx'
+#output_file = 'test.sql'
 
 pm = pd.read_excel(os.path.join(chdir, file_name), sheet_name=0, header=0, names=None, index_col=None,
                                  convert_float=True, converters={'error_code' : str})
@@ -51,8 +51,7 @@ for indicador in indicadores:
     from_query = from_clause(process_metadata_query, dict_sq)
 
     # WHERE
-    process_metadata_where = process_metadata_query.loc[(process_metadata_query['where_value_a'].notnull()
-                                                         | process_metadata_query['where_value_b'].notnull())]\
+    process_metadata_where = process_metadata_query.loc[(process_metadata_query['where_value'].notnull())]\
         .reset_index(drop=True)
     where_query = where_clause(process_metadata_where, dict_sq)
 
